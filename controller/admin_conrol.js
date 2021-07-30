@@ -13,8 +13,7 @@ const adminpage = async (req, res) => {
 const users = async (req, res) => {
   try {
     const users = await UserModel.find({ admin: 0 });
-    console.log(users);
-    res.render("admin/admin_users", { users: users });
+    res.render("admin/admin_users", { title: "Users", users: users });
   } catch (error) {
     console.log(`Displaying users ${error}`);
   }
@@ -23,8 +22,7 @@ const users = async (req, res) => {
 const admins = async (req, res) => {
   try {
     const admins = await UserModel.find({ admin: 1 });
-    console.log(admins);
-    res.render("admin/admin_admins", { admins: admins });
+    res.render("admin/admin_admins", { title: "Admins", admins: admins });
   } catch (error) {
     console.log(`Displaying users ${error}`);
   }
@@ -34,7 +32,7 @@ const pages = (req, res) => {
   PageModel.find({})
     .sort({ sorting: 1 })
     .exec((err, pages) => {
-      res.render("admin/admin_pages", { pages: pages });
+      res.render("admin/admin_pages", { pages: pages, title: "Custom pages" });
       console.log(req.session.user);
     });
 };
@@ -50,14 +48,12 @@ const postaddpage = (req, res) => {
   console.log(req.body);
   var title = req.body.title;
   var slug = req.body.slug.replace(/\s+/g, "-").toLowerCase();
-  if (slug == "") {
-    slug = title.replace(/\+s/g, "-").toLowerCase();
-  }
+  slug = title.replace(/\+s/g, "-").toLowerCase();
   var content = req.body.content;
   PageModel.findOne({ slug: slug }, function (err, page) {
     if (page) {
       console.log("page exists already");
-      res.render("add_page", { message: "page exists" });
+      return res.render("add_page", { message: "Page title already exists" });
     } else {
       var page = new PageModel({
         title: title,
@@ -72,7 +68,6 @@ const postaddpage = (req, res) => {
       });
     }
   });
-  console.log("success");
 };
 //get edit page
 const geteditpage = (req, res) => {
@@ -125,9 +120,9 @@ const getdeletepage = async (req, res) => {
   try {
     const terminator = await PageModel.deleteOne({ _id }, { new: true });
 
-    res.redirect("/admin/pages");
+    res.redirect("back");
   } catch (err) {
-    console.log(`Deleting err :  ${err}`);
+    console.log(`Deleting  page error :  ${err}`);
   }
 };
 

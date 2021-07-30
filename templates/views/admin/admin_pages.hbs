@@ -39,8 +39,10 @@
           </td>
           <td>{{this.title}}</td>
           <td><a href="/admin/pages/edit/page/{{this.slug}}">Edit</a></td>
-
-          <td><a href="/admin/pages/delete/page/{{this.slug}}">Delete</a></td>
+          <td>
+            <a href="/admin/pages/delete/page/{{this.slug}}"
+              onclick=" return confirm('Are you sure you want to delete this page?');">Delete</a>
+          </td>
           <br />
         </tr>
         {{/each}}

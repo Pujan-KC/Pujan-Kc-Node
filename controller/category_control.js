@@ -1,18 +1,24 @@
 const CatModel = require("../src/models/catmodel");
+
 //get category index
 const category = async (req, res) => {
   try {
     console.log("here");
     const cats = await CatModel.find({});
-    res.render("admin/admin_categories", { cats: cats });
+    res.render("admin/admin_categories", {
+      title: "Admin Categories",
+      cats: cats,
+    });
   } catch (err) {
-    console.log(`Catch Erro ${err}`);
+    console.log(`Catched Error ${err}`);
   }
 };
+
 //get add category
 const getaddcategory = (req, res) => {
-  res.render("admin/add_category");
+  res.render("admin/add_category", { title: "Add category" });
 };
+
 //post add category
 const postaddcategory = async (req, res) => {
   var message = "";
@@ -35,8 +41,9 @@ const postaddcategory = async (req, res) => {
     console.log(`Add category Error ${err}`);
     message = "server error   " + err;
   }
-  res.render("admin/add_category", { message: message });
+  res.render("admin/add_category", { message: message, title: "Add category" });
 };
+
 //get edit category
 const geteditcategory = async (req, res) => {
   try {
@@ -48,22 +55,21 @@ const geteditcategory = async (req, res) => {
     console.log(`finding category erro ${err}`);
   }
 };
+
 //post edit category =
 const posteditcategory = async (req, res) => {
-  var message = null;
   try {
     const { _id } = req.params;
     const updater = await CatModel.findByIdAndUpdate(
       { _id },
-      { $set: { title: req.body.title } },
-      { new: true }
+      { $set: { title: req.body.title } }
     );
     res.redirect("/admin/categories");
   } catch (err) {
-    console.log(err);
-    message = err;
+    console.log(`Editing category error ${err}`);
   }
 };
+
 //get delete category
 const getdeletecategory = async (req, res) => {
   try {
@@ -72,7 +78,7 @@ const getdeletecategory = async (req, res) => {
     res.redirect("/admin/categories");
     console.log(terminator);
   } catch (err) {
-    console.log(`Deleting Erro ${err}`);
+    console.log(`Deleting category Error ${err}`);
   }
 };
 //show or hide category in nav

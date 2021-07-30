@@ -8,6 +8,7 @@ const products = async (req, res) => {
     const products = await ProductModel.find({});
     const count = await ProductModel.countDocuments();
     res.render("admin/admin_products", {
+      title: "Admin Products",
       products: products,
       count: count,
     });
@@ -15,20 +16,24 @@ const products = async (req, res) => {
     console.log(`Product index page error ${err}`);
   }
 };
+
 //get add products
 const getaddproducts = async (req, res) => {
   try {
     const category = await CatModel.find({});
-    res.render("admin/add_products", { categories: category });
+    res.render("admin/add_products", {
+      categories: category,
+      title: "Add products",
+    });
   } catch (error) {
     console.log("get add product error", error);
   }
 };
+
 //post add products
 const postaddproducts = async (req, res) => {
   try {
     const categories = await CatModel.find({});
-    var message = null;
     var ab = null;
     const title = req.body.title;
     var slug = title.replace(/\s/g, "-").toLowerCase();
@@ -69,13 +74,16 @@ const postaddproducts = async (req, res) => {
     }
   } catch (error) {
     console.log(`Adding product error ${error}`);
-    res.render("admin/add_products", { message: `  ${error}` });
+    res.render("admin/add_products", {
+      message: `  ${error}`,
+      title: "Add product",
+    });
   }
 };
+
 //get delete products
 const getdeleteproducts = async (req, res) => {
   try {
-    console.log("here");
     var slug = req.params.slug;
     var product = await ProductModel.findOne({ slug });
     if (!product.image) {
@@ -89,33 +97,34 @@ const getdeleteproducts = async (req, res) => {
       //if file removed
       else {
         ProductModel.deleteOne({ slug }, (err, p) => {
-          if (err) console.log(err);
+          if (err) console.log(`Deleting product error ${err}`);
           else {
-            console.log(p, "product Deleted");
             return res.redirect("back");
           }
         });
       }
     });
   } catch (err) {
-    console.log(err);
+    console.log(`Deleting product error ${err}`);
   }
 };
+
 //get edit products
 const geteditproducts = async (req, res) => {
   try {
     const { slug } = req.params;
     var product = await ProductModel.findOne({ slug });
     var category = await CatModel.find({});
-
     res.render("admin/edit_products", {
+      title: "Edit Products",
       product: product,
       categories: category,
     });
   } catch (error) {
-    console.log(error);
+    console.log(`Editing Products error ${error}`);
   }
 };
+
 //post edit products
 const posteditproducts = async (req, res) => {
   try {
@@ -168,9 +177,7 @@ const posteditproducts = async (req, res) => {
           { $set: req.body },
           { new: true }
         );
-
         product = await ProductModel.findOne({ slug });
-
         //add new image
         image.mv("public/product_images/" + product.image, (err) => {
           if (err) {
@@ -184,7 +191,10 @@ const posteditproducts = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.render("edit_products", { message: "server error", error });
+    res.render("edit_products", {
+      message: `server error ${error}`,
+      title: "Edit Products",
+    });
   }
 };
 //get switch stock status

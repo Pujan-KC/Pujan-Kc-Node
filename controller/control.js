@@ -17,6 +17,7 @@ const home = async (req, res) => {
     const pages = await PageModel.find({ show: true });
     //rendering home page
     res.render("index", {
+      title: "E-Market",
       slides: slides,
       pages: pages,
       categories: categories,
@@ -26,6 +27,7 @@ const home = async (req, res) => {
     console.log(`Rendering home page error ${error}`);
   }
 };
+
 //Get All products
 const allproducts = async (req, res) => {
   try {
@@ -41,11 +43,13 @@ const allproducts = async (req, res) => {
     console.log(`Displaying all products error ${error}`);
   }
 };
+
 //contactus
 const contactus = async (req, res) => {
   console.log("about us page");
-  res.render("contact_us");
+  res.render("contact_us", { title: "contactus" });
 };
+
 //get products by category
 const productbycategory = async (req, res) => {
   const { category } = req.params;
@@ -57,6 +61,7 @@ const productbycategory = async (req, res) => {
     categories: categories,
   });
 };
+
 //Get pages
 const getpages = async (req, res) => {
   try {
@@ -69,6 +74,7 @@ const getpages = async (req, res) => {
     res.redirect("/");
   }
 };
+
 //get product detail
 const product_detail = async (req, res) => {
   try {

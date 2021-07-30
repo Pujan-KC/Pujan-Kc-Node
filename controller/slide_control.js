@@ -9,8 +9,6 @@ const slides_index = async (req, res) => {
       if (i == 0) slides[i].active = "active";
       slides[i].order = i + 1;
     }
-    console.log(slides);
-
     res.render("admin/admin_slideshow", {
       title: "Slide Show",
       slides: slides,
@@ -19,6 +17,7 @@ const slides_index = async (req, res) => {
     console.log(`Displaying slides error ${err}`);
   }
 };
+
 //get add slideshow
 const get_add_slide = (req, res) => {
   res.render("admin/admin_add_slide", {
@@ -26,6 +25,7 @@ const get_add_slide = (req, res) => {
     slideshow: true,
   });
 };
+
 //post add slideshow
 const post_add_slide = async (req, res) => {
   try {
@@ -38,8 +38,8 @@ const post_add_slide = async (req, res) => {
     //if image is uploaded
     const { image } = req.files;
     const imageext = image.name.split(".").pop();
-    console.log(imageext);
     const extarry = ["jpg", "png", "jpeg"];
+
     //returning back if extension is invalid
     if (extarry.indexOf(imageext) == -1) {
       console.log("invalid file extension");
@@ -57,6 +57,7 @@ const post_add_slide = async (req, res) => {
     console.log(`Adding slideshow error ${error}`);
   }
 };
+
 //get edit slideshow
 const get_edit_slide = async (req, res) => {
   try {
@@ -70,6 +71,7 @@ const get_edit_slide = async (req, res) => {
     console.log(`Getting slideshow data error ${error}`);
   }
 };
+
 //post edit slideshow
 const post_edit_slide = async (req, res) => {
   try {
@@ -107,8 +109,6 @@ const post_edit_slide = async (req, res) => {
       req.flash("success", "product edited");
       res.redirect("back");
     });
-
-    console.log(imageext);
   } catch (error) {
     console.log(`Editing slideshow error ${error}`);
   }

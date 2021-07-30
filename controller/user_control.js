@@ -5,6 +5,7 @@ var UserModel = require("../src/models/users");
 const get_register = (req, res) => {
   res.render("register", { title: "Register" });
 };
+
 //post register
 const post_register = async (req, res) => {
   try {
@@ -14,11 +15,18 @@ const post_register = async (req, res) => {
       const ab = new UserModel(req.body);
       hashedPassword = await bcrypt.hash(password, 10);
       ab.password = hashedPassword;
-      const inserter = await ab.save();
-      res.render("register", { message: "You are now registered" });
+      await ab.save();
+      res.render("login", {
+        message: "You are now registered ",
+        password: password,
+        username: ab.username,
+      });
     } else {
       req.flash("info", "Passwords Donont Match");
-      res.render("register", { message: "Passwords Donot match" });
+      res.render("register", {
+        message: "Passwords Donot match",
+        title: "Register",
+      });
     }
   } catch (error) {
     console.log(`Registering user error ${error}`);

@@ -9,6 +9,7 @@ const pages = (req, res) => {
       console.log(req.session.user);
     });
 };
+
 //get add pages
 const getaddpage = (req, res) => {
   var slug = "";
@@ -19,6 +20,7 @@ const getaddpage = (req, res) => {
     content: content,
   });
 };
+
 //post add page
 const postaddpage = (req, res) => {
   console.log(req.body);
@@ -44,6 +46,7 @@ const postaddpage = (req, res) => {
     });
   });
 };
+
 //get edit page
 const geteditpage = (req, res) => {
   var { slug } = req.params;
@@ -61,40 +64,29 @@ const geteditpage = (req, res) => {
     });
   });
 };
+
 //post edit page
 const posteditpage = async (req, res) => {
   try {
     var { title, slug, content } = req.body;
-
-    console.log(title, slug, content);
-
-    var updater = await PageModel.updateOne(
-      { slug },
-      {
-        $set: {
-          content,
-          title,
-        },
-      }
-    );
+    await PageModel.updateOne({ slug }, { $set: { content, title } });
     res.redirect("/admin/pages");
-    console.log("success");
   } catch (error) {
     console.log(`Editing page error ${error}`);
   }
 };
+
 //get delete page
 const getdeletepage = async (req, res) => {
   const { slug } = req.params;
-  console.log(slug);
   try {
-    const terminator = await PageModel.deleteOne({ slug }, { new: true });
-
+    await PageModel.deleteOne({ slug }, { new: true });
     res.redirect("/admin/pages");
   } catch (err) {
-    console.log(`Deleting err :  ${err}`);
+    console.log(`Deleting page err :  ${err}`);
   }
 };
+
 //show hide dynamic pages
 const showpage = async (req, res) => {
   try {

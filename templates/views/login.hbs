@@ -7,22 +7,30 @@
 <body>
 
   {{>navbar}}
+
   <div class="container align-items-center pt-5">
     <div class="row mx-auto">
       <div class="col-s-12 col-md-8 col-lg-6 me-auto">
         <h1 class="text-primary text-start mb-2">{{title}}</h1>
         <h2 class="text-danger mt-3 text-capitalize">{{message}}</h2>
         <form action="/users/login" method="POST">
+
           <label for="username">User Name</label>
-          <input class="form-control" type="text" placeholder="Enter your user name" id="username" name="username" />
+          <input class="form-control" type="text" name="username" placeholder="Enter your user name"
+            value="{{username}}" id="username" />
+
           <label for="password">Password</label>
-          <input class="form-control" type="password" name="password" placeholder="Enter your password" id="password" />
+          <input class="form-control" type="password" name="password" placeholder="Enter your password"
+            value="{{password}}" id="password" />
+
           <button type="submit" class="btn btn-success mt-1 btn-outline-warning btn-block">Login</button>
         </form>
       </div>
     </div>
+
   </div>
 </body>
+
 {{>footer}}
 
 </html>

@@ -7,7 +7,7 @@ const auth = (req, res, next) => {
       return res.render("index");
     }
   } else {
-    return res.render("login", { message: "Hello" });
+    return res.render("login", { title: "login", message: "LOGIN" });
   }
 };
 module.exports = auth;
