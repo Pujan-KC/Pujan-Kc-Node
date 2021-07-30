@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+  {{> admin_header}}
+</head>
+
+<body>
+  {{> admin_navbar}}
+
+  {{> admin_sidebar}}
+  <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h1 class="text-center text-danger text-uppercase"> {{message}}</h1>
+    <h2 class="page-title">EDIT PAGE</h2>
+    <a href="/admin/pages" class="btn btn-primary">Back to all pages</a>
+    <br /><br />
+    <form action="/admin/pages/editpage/{{slug}}" method="POST">
+      <div class="form-group">
+        <label for="">Title</label>
+        <input type="text" name="title" value="{{page_title}}" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="">content</label>
+        <textarea id="ta" name="content" cols="30" rows="10" class="form-control">{{content}}</textarea>
+      </div>
+      <input type="hidden" name="slug" value="{{slug}}">
+
+      <button class="btn btn-success">EDIT</button>
+    </form>
+    {{> admin_footer}}
+    <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>

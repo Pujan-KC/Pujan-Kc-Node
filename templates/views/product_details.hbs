@@ -1,0 +1,41 @@
+<html lang="en">
+
+<head>
+  {{>header}}
+</head>
+
+<body>
+  {{>navbar}}
+
+  <div class="container-fluid mt-5 pt-5">
+    {{#with product}}
+    <div class="row">
+      <div class="col-xs-12 col-md-5">
+        <figure>
+          <img src="/product_images/{{image}}" alt="{{image}}" width="500" class="img-fluid" />
+        </figure>
+      </div>
+      <div class="col-xs-12 col-md-5">
+        <ul class="list-group">
+          <li class="list-group-item active">Item : {{title}}</li>
+          <li class="list-group-item">Price : Rs. {{price}}</li>
+          <li class="list-group-item">Description : {{description}}</li>
+          <li class="list-group-item">Category : {{category}}</li>
+          <li class="list-group-item">Details : </li>
+          <li class="list-group-item text-center">
+            <a href="/cart/add/{{this.slug}}" class="card-link"><button class="btn   btn-primary"><i
+                  class="bi bi-cart-plus"></i>Add to cart</button></a>
+            <a href="/users/addwishlist/{{this.slug}}" class="card-link">
+              <button class="btn btn-dark">Add to Wishlist</button></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    {{/with}}
+  </div>
+
+  {{>footer}}
+  <script src="/main.js"></script>
+</body>
+
+</html>

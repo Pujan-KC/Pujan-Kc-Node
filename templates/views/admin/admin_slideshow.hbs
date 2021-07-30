@@ -1,0 +1,68 @@
+<html lang="en">
+
+<head>
+  {{>header}}
+</head>
+
+<body>
+  {{> admin_navbar}}
+  <div class="container-fluid bg-secondary px-1 ">
+    <div class="row">
+      <div class="col me-auto bg-light col-md-3">
+        <div class="row gy-1 bg-secondary">
+          {{#each slides}}
+          <div class="col-12 bg-dark">
+            <h5 class="text-center text-lead text-primary"> SLIDE #{{this.order}}</h5>
+            <h4 class="text-center text-danger">{{this.heading}}</h4>
+            <a href="/admin/slides/edit_slideshow">
+              <figure class="text-center">
+                <img src="/slideshow_images/{{this.image}}" width="200" alt="Cannot load image">
+              </figure>
+            </a>
+            <h5 class="text-center text-success">{{this.content}}</h5>
+            <hr class="text-danger text-lead">
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="col mx-auto col-md-9">
+        <h3>
+          <a href="/admin/slides/add_slideshow" class="btn btn-success btn-lg text-uppercase ">Add Slide</a>
+          <a href="/admin/slides/edit_slideshow" class="btn btn-warning btn-lg text-uppercase">Edit Slides</a>
+        </h3>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            {{#each slides}}
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{this.order}}"></li>
+            {{/each}}
+          </ol>
+          <div class="carousel-inner">
+            {{#each slides}}
+            <div class="carousel-item {{this.active}}">
+              <img class="d-block w-100" src="/slideshow_images/{{this.image}}" alt="{{this.title}} slide">
+              <div class="carousel-caption d-none d-md-block">
+                <h5 class="h1 text-danger text-uppercase">{{this.heading}}</h5>
+                <p class="text-lead text-primary text-capitalize">{{this.content}} </p>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only text-success text-lead">PREVIOUS</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only text-success text-lead">NEXT</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{>footer}}
+
+</body>
+
+</html>

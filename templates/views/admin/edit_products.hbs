@@ -1,0 +1,66 @@
+<html lang="en">
+
+<head>
+  {{> admin_header}}
+</head>
+
+<body>
+  {{> admin_navbar}}
+
+  {{> admin_sidebar}}
+  <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h1 class="text-center text-danger text-uppercase"> {{message}}</h1>
+    <h2 class="page-title text-capitalize">{{title}}</h2>
+    <a href="/admin/pages" class="btn btn-primary"> All Products</a>
+    <br /><br />
+    {{#with product}}
+    <form action="/admin/products/edit/product/{{slug}}" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="">Title</label>
+        <input id="title" type="text" name="title" value="{{title}}" class="form-control" placeholder="Title" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" cols="30" class="form-control"
+          rows="10">{{description}}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" value="{{price}}" name="price" />
+      </div>
+      <div class="form-group">
+        <div class="h3 text-primary">Current Image</div>
+        {{#if image}}
+        <figure>
+          <img width="300" src="/product_images/{{image}}" alt="Sorry cannot load image" />
+        </figure>
+        {{else}}
+        <figure>
+          <img src="/images/noimage.png" alt="no image is uploaded" width="200" />
+        </figure>
+        {{/if}}
+      </div>
+      <div class="form-group">
+        <h3 class="text-warning">Replace Image</h3>
+        <input type="file" name="image" id="image" />
+      </div>
+      <input type="hidden" name="slug" value="{{slug}}" />
+      {{/with}}
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select name="category" class="form-control">
+          {{#each categories}}
+          <option value="{{this.title}}">{{this.title}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <button class="btn btn-success mt-2">Save Changes</button>
+    </form>
+  </div>
+  {{>admin_footer}}
+
+
+</body>
+
+</html>

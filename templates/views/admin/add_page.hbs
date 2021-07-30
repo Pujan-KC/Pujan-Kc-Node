@@ -1,0 +1,35 @@
+<html lang="en">
+
+<head>
+  {{>admin_header}}
+</head>
+
+<body>
+  {{>admin_navbar}}
+  {{>admin_sidebar}}
+  <div class="col-md-9 ms-sm-auto col-lg-8 mx-auto px-md-4">
+    <h1 class="text-center text-danger text-uppercase"> {{message}}</h1>
+    <h2 class="page-title">{{title}}</h2>
+    <a href="/admin/pages" class="btn btn-primary">All pages</a>
+    <br /><br />
+
+    <form action="/admin/pages/add_page" method="POST">
+      <div class="form-group">
+        <label for="">Title</label>
+        <input type="text" name="title" value="{{title}}" class="form-control" placeholder="Title" />
+      </div>
+      <div class="form-group">
+        <label for="">content</label>
+        <textarea id="ta" placeholder="content" name="content" cols="30" rows="10"
+          class="form-control">{{content}}</textarea>
+      </div>
+      <button class="btn btn-success">Submit</button>
+    </form>
+  </div>
+
+  {{>admin_footer}}
+  <script src="//cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+
+</html>

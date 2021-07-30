@@ -1,0 +1,28 @@
+<html lang="en">
+
+<head>
+  {{> admin_header}}
+</head>
+
+<body>
+  {{> admin_navbar}}
+
+  {{> admin_sidebar}}
+  <div class="col-md-9 ms-sm-auto col-lg-8 mx-auto px-md-4">
+    <h1 class="text-center text-danger text-uppercase"> {{message}}</h1>
+    <h2 class="page-title">{{title}}</h2>
+    <a href="/admin/categories" class="btn btn-primary">All Categories</a>
+    <br /><br />
+    <form action="/admin/categories/edit/category/{{id}}" method="POST">
+      <div class="form-group">
+        <label for="">Title</label>
+        <input type="text" name="title" value="{{title}}" class="form-control" placeholder="Title" />
+        <input type="hidden" name="id" value="{{id}}" />
+        <button class="mt-2 btn btn-success">EDIT</button>
+    </form>
+
+  </div>
+  {{> admin_footer}}
+</body>
+
+</html>

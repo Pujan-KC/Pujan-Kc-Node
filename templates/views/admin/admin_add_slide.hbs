@@ -1,0 +1,29 @@
+<html lang="en">
+
+<head>
+  {{>admin_header}}
+</head>
+
+<body>
+  {{>admin_navbar}}
+  {{>admin_sidebar}}
+  <div class="col-md-9 ms-sm-auto col-lg-8 mx-auto px-md-4">
+    <h1 class="text-center text-danger text-uppercase"> {{message}}</h1>
+    <h2 class="page-title">{{title}}</h2>
+    <a href="/admin/slides" class="btn btn-primary">Back</a>
+    <br /><br />
+    <form action="/admin/pages/add_slideshow" method="POST" enctype="multipart/form-data">
+      <label for="heading">Heading</label>
+      <input type="text" id="heading" class="form-control" placeholder="Heading for slide-show" name="heading">
+      <label for="content">Content</label>
+      <input type="text" name="content" id="content" placeholder="content" class="form-control">
+      <label for="image">Image</label>
+      <input type="file" name="image" id="image" class="form-control">
+      <button type="submit" class="btn btn-success mt-1">Add Item</button>
+    </form>
+  </div>
+
+  {{>admin_footer}}
+</body>
+
+</html>

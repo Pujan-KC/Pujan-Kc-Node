@@ -1,0 +1,25 @@
+<html lang="en">
+
+<head>
+  {{>admin_header}}
+</head>
+
+<body>
+  {{> admin_navbar}}
+  {{>admin_sidebar}}
+  <div class="col-md-9 ms-sm-auto col-lg-8 mx-auto px-md-4">
+    <h1 class="text-center text-danger text-uppercase"> {{message}}</h1>
+    <h2 class="page-title">Add a Category</h2>
+    <a href="/admin/categories" class="btn mb-2 btn-primary">All Categories</a>
+    <form action="/admin/categories/add-category" method="POST">
+      <label for="title">
+        <h4 class="text-warning"> Title for Category</h4>
+      </label>
+      <input id="title" type="text" name="title" class="form-control" placeholder="Title" />
+      <button type="submit" class="btn mt-1 btn-success">Submit</button>
+    </form>
+  </div>
+  {{>admin_footer}}
+</body>
+
+</html>

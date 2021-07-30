@@ -1,0 +1,67 @@
+<html lang="en">
+
+<head>
+  {{>header}}
+</head>
+
+<body>
+  {{>navbar}}
+  <div class="container-fluid">
+    <div class="row mt-5 ">
+      <div class="col-12">
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item list-group-item-action "><a href="/products/view">
+              <button class="btn btn-primary">All Products</button></a>
+          </li>
+          {{#each categories}}
+          <li class="list-group-item list-group-item-action  ">
+            <a href="/products/view/categories/{{this.title}}"><button
+                class="btn btn-outline-success">{{this.title}}</button></a>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="row g-1">{{#each products}}
+      <div class="col-xs-12 col-md-3 col-lg-2">
+        <div class="card" style="height:25rem;">
+          <div class="card-body">
+            <figure style="height:15rem;">
+              {{#if this.image}}
+              <img width="100px " class="card-img-top" src="/product_images/{{this.image}}" alt="Product image cap" />
+              {{else}}
+              <img class="card-img-top" width="100px" src="/images/noimage.png" alt="{{this.title}} image " />
+              {{/if}}
+              <p class="text-lead">{{this.title}}</h5>
+              <p class="card-text">{{this.description}}</p>
+            </figure>
+          </div>
+          <div class="card-footer">
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item text-start"> <button class="btn-outline-secondary">Rs.{{this.price}}/-</button>
+              </li>
+              <li class="list-group-item ">
+                {{#if this.stock}}
+                <button class="btn-outline-success"><i class="bi bi-check-circle-fill"></i>Stock</button>
+                {{else}}
+                <button class=" btn-outline-danger"><del> Stock</del> </button>
+                {{/if}}
+              </li>
+            </ul>
+            <a href="/cart/add/{{this.slug}}" class="card-link"><button class="btn   btn-primary"><i
+                  class="bi bi-cart-plus"></i></button></a>
+            <a href="/users/addwishlist/{{this.slug}}" class="card-link"><button class="btn btn-sm btn-dark">+
+                Wishlist</button></a>
+            <a href="/products/view/detail/{{this.slug}}" class="card-link">
+              <button class="btn btn-primary btn-sm"> View </button></a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{>footer}}
+</body>
+
+</html>

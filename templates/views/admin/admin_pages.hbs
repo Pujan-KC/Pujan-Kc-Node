@@ -1,0 +1,56 @@
+<html lang="en">
+
+<head>
+  {{> admin_header}}
+</head>
+
+<body>
+  {{> admin_navbar}}
+
+  {{> admin_sidebar}}
+  <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h4 class="text-uppercase text-center">Pages </h4>
+
+    <h1 class="text-center text-danger text-uppercase"> {{message}}</h1>
+    <h2 class="page-title"><a href="/admin/pages/add_page">
+        <button>ADD PAGE</button>
+      </a></h2>
+    {{msg}}
+    <table class="table table-striped">
+      <thead>
+        <tr class="home">
+          <td>Show/Hide</td>
+          <td>Title</td>
+          <td>Edit </td>
+          <td>Delete</td>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each pages}}
+        <tr>
+          <td>
+            {{#if this.show}}
+            <a href="/admin/pages/showpage/{{this.slug}}?action=hide"
+              class="btn btn-outline-success fa fa-check text-Success">Shown</a>
+            {{else}}
+            <a href="/admin/pages/showpage/{{this.slug}}?action=show"
+              class="btn btn-outline-danger fa fa-times text-danger">Hidden</a>
+            {{/if}}
+          </td>
+          <td>{{this.title}}</td>
+          <td><a href="/admin/pages/edit/page/{{this.slug}}">Edit</a></td>
+
+          <td><a href="/admin/pages/delete/page/{{this.slug}}">Delete</a></td>
+          <br />
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+
+
+  {{> admin_footer}}
+</body>
+
+</html>

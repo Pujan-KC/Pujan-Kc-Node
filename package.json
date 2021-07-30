@@ -1,0 +1,31 @@
+{
+  "name": "re-useable",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js -e js,hbs,css"
+  },
+  "keywords": [],
+  "author": "Pujan Katuwal",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.12.0",
+    "fs-extra": "^10.0.0",
+    "hbs": "^4.1.2",
+    "mkdirp": "^1.0.4",
+    "mongoose": "^5.12.15",
+    "req-flash": "0.0.3",
+    "resize-img": "^2.0.0"
+  }
+}

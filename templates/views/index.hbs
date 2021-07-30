@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+  {{>header}}
+</head>
+
+<body>
+  {{>navbar}}
+
+  <h1 class="text-danger mt-5 text-center text-capitalize"> {{message}}</h1>
+  <div class="container-fluid pt-2 bg-secondary">
+    <div class="row pt-1">
+      <div class="col col-12">
+        <ul class="list-group list-group-horizontal ">
+          <li class="list-group-item list-group-item-action "><a href="/products/view"><button
+                class="btn btn-primary">All Products</button></a></li>
+          {{#each categories}}
+          <li class="list-group-item list-group-item-action  ">
+            <a href="/products/view/categories/{{this.title}}"><button
+                class="btn btn-outline-success">{{this.title}}</button></a>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+
+    </div>
+    <div class="row pt-1">
+      <div class="col col-12 ">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            {{#each slides}}
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{this.order}}"></li>
+            {{/each}}
+          </ol>
+          <div class="carousel-inner">
+            {{#each slides}}
+            <div class="carousel-item {{this.active}}">
+              <img class="d-block w-100" height="550rem" src="/slideshow_images/{{this.image}}"
+                alt="{{this.title}} slide">
+              <div class="carousel-caption d-none d-md-block">
+                <h5 class="h1 text-danger text-uppercase">{{this.heading}}</h5>
+                <p class="text-lead text-primary text-capitalize">{{this.content}} </p>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only text-success text-lead">PREVIOUS</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only text-success text-lead">NEXT</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row pt-1 g-1">
+      {{#each products}}
+      <div class="col-xs-12 col-md-3 col-lg-2">
+        <div class="card" style="height:25rem;">
+          <div class="card-body">
+            <figure style="height:15rem;">
+              {{#if this.image}}
+              <img width="100px " class="card-img-top" src="/product_images/{{this.image}}" alt="Product image cap" />
+              {{else}}
+              <img class="card-img-top" src="/images/noimage.png" alt="{{this.title}} image " />
+              {{/if}}
+              <p class="text-lead">{{this.title}}</h5>
+              <p class="card-text">{{this.description}}</p>
+            </figure>
+          </div>
+          <div class="card-footer">
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item text-start"> <button class="btn-outline-secondary">Rs.{{this.price}}/-</button>
+              </li>
+              <li class="list-group-item ">
+                {{#if this.stock}}
+                <button class="btn-outline-success">In Stock</button>
+                {{else}}
+                <button class=" btn-outline-danger"><del> Stock</del> </button>
+                {{/if}}
+              </li>
+            </ul>
+            <a href="/cart/add/{{this.slug}}" class="card-link"><button class="btn   btn-primary"><i
+                  class="bi bi-cart-plus"></i></button></a>
+            <a href="/users/addwishlist/{{this.slug}}" class="card-link"><button class="btn btn-sm btn-dark">+
+                Wishlist</button></a>
+            <a href="/products/view/detail/{{this.slug}}" class="card-link">
+              <button class="btn btn-primary btn-sm"> View </button></a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+  {{>footer}}
+
+</body>
+
+</html>

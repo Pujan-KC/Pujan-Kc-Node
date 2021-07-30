@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+    {{> admin_header}}
+</head>
+
+<body>
+    {{> admin_navbar}}
+
+    {{> admin_sidebar}}
+    <div class="col-md-9 ms-sm-auto mx-auto col-lg-10 px-md-4">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-warning">
+                            <td>User Name</td>
+                            <td>Name </td>
+                            <td>Email</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each users}}
+                        <tr class="text-primary">
+                            <td>{{this.username}}</td>
+                            <td>{{this.name}}</td>
+                            <td>{{this.email}}</td>
+                            <br />
+                        </tr>
+                        {{/each}}
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    {{> admin_footer}}
+</body>
+
+
+</html>

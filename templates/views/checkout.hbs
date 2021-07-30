@@ -1,0 +1,118 @@
+<html lang="en">
+
+<head>
+  {{>header}}
+</head>
+
+<body>
+  {{>navbar}}
+
+  <div class="container">
+    <div class="row">
+      <div class="col md-10">
+        <h1 class="text-center text-success text-capitalize">Your cart </h1>
+        {{!-- cart sectin --}}
+        {{#if cart}}
+        <table class="table table-striped text-center">
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+            <th>Add</th>
+          </tr>
+          {{#each cart}}
+          <tr>
+            <td>
+              <figure style="height: 3rem;">
+                <img src="/product_images/{{this.image}}" width="70" alt="{{this.image}}" />
+              </figure>
+            </td>
+            <td>{{this.title}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.qty}}</td>
+            <td>
+              <a href="/cart/update/{{this.title}}?action=add"><button class="btn btn-primary">+</button></a>
+              &nbsp
+              <a href="/cart/update/{{this.title}}?action=remove"><button class="btn btn-warning">-</button></a>
+              &nbsp
+              <a href="/cart/update/{{this.title}}?action=clear"
+                onclick="return confirm('Are you sure you want to abandon this cart?');"><button
+                  class="btn btn-danger">clear</button></a>
+              &nbsp
+            </td>
+            <td> <a href="/users/addwishlist/{{this.slug}}?item={{this.title}}&qty={{this.qty}}" class="card-link">
+                <button class="btn btn-dark">+ Wishlist</button></a>
+            </td>
+          </tr>
+          {{/each}}
+          <tr>
+            <td colspan="5" align="right">
+              <a href="/cart/clear" class="btn btn-danger clearcart"
+                onclick="return confirm('Are you sure you want to abandon this cart?');">clear cart</a>
+            </td>
+            <td align="left"><a href="/cart/buy" class="btn btn-primary buynow">Buy Now</a></td>
+          </tr>
+        </table>
+        {{else}}
+        <h3 class="text-warning text-center">Your cart is empty</h3>
+        {{/if}}
+        <hr>
+        <hr>
+        {{!-- wishlist section --}}
+        <h3 class="text-warning text-uppercase text-center">Your wishlist</h3>
+        {{#if products}}
+        <table class="table table-striped text-center">
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+            <th>Add to Cart</th>
+          </tr>
+          {{#each products}}
+          <tr>
+            <td>
+              <figure style="height: 3rem;">
+                <img src="/product_images/{{this.wished_product.image}}" width="60" alt="{{this.image}}" />
+              </figure>
+            </td>
+            <td>{{this.wished_product.title}}</td>
+            <td>{{this.wished_product.price}}</td> &nbsp;
+            <td>{{this.qty}}</td>
+            <td>
+              <a href="/users/wishlist/update/{{this.wished_product.slug}}?action=add"><button
+                  class="btn btn-primary">+</button></a>
+              &nbsp;
+              <a href="/users/wishlist/update/{{this.wished_product.slug}}?action=remove"><button
+                  class="btn btn-warning">-</button></a>
+              &nbsp;
+              <a href="/users/wishlist/update/{{this.wished_product.slug}}?action=clear"
+                onclick="return confirm('Are you sure you want to clear this item?');"><button
+                  class="btn btn-danger">clear</button></a>
+              &nbsp
+            </td>
+            <td> <a href="/cart/add/{{this.wished_product.slug}}?qty={{this.qty}}" class="card-link">
+                <button class="btn btn-primary">Add to Cart</button></a>
+            </td>
+          </tr>
+          {{/each}}
+          <tr>
+            <td colspan="5" align="right">
+              <a href="/users/wishlist/clear" class="btn btn-danger clearcart"
+                onclick="return confirm('Are you sure you want to abandon this cart?');">clear Lists</a>
+            </td>
+          </tr>
+        </table>
+        {{else}}
+        <h3 class="text-warning text-center">There are no items in your wishlist</h3>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  {{>footer}}
+</body>
+
+</html>

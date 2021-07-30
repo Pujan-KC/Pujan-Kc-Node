@@ -1,0 +1,77 @@
+<html lang="en">
+
+<head>
+    {{>admin_header}}
+</head>
+
+<body>
+    {{>admin_navbar}}
+
+    {{>admin_sidebar}}
+    <div class="col-md-10 mx-auto ms-sm-auto col-lg-8 px-md-2">
+        <h1 class="text-center text-success">Products</h1>
+        <h2 class="text-warning text-center">Only HighLighted products will be shown in Home page</h2>
+        <a href="/admin/products/add-products" class="btn btn-small btn-primary">Add A Product</a>
+        <h2 class="text-center text-danger text-uppercase">{{message}}</h2>
+        <table class="table table-striped">
+            <tr class="text-center">
+                <th style="width: 50px;">Stock</th>
+                <th>HighLight</th>
+                <th>Product Image</th>
+                <th>Title</th>
+                <th class="text-start">description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+            {{#each products}}
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        {{#if this.stock}}
+                        <a href="/admin/products/stock/{{this.slug}}?action=remove" class="btn btn-success btn-sm">Stock
+                            <i class="fa fa-check"></i></a>
+                        {{else}}
+                        <a href="/admin/products/stock/{{this.slug}}?action=add" class="btn btn-danger btn-sm">Stock <i
+                                class="fa fa-times"></i></a>
+                        {{/if}}
+                    </td>
+                    <td class="text-center">
+                        {{#if this.highlight}}
+                        <a href="/admin/products/highlight/{{this.slug}}?action=remove"
+                            class="btn btn-success btn-sm">Marked
+                            <i class="fa fa-check"></i></a>
+                        {{else}}
+                        <a href="/admin/products/highlight/{{this.slug}}?action=add"
+                            class="btn btn-danger btn-sm">Unmarked
+                            <i class="fa fa-times"></i></a>
+                        {{/if}}
+                    </td>
+                    <td class="text-center">
+                        {{#if this.image}}
+                        <img src="/product_images/{{this.image}}" alt="Cannot Load Image Sorry" width="80" />
+                        {{else}}
+                        <img src="/images/noimage.png" alt="No image Uploaded" class="img-fluid" width="80" />
+                        {{/if}}
+                    </td>
+                    <td class="text-center">{{this.title}}</td>
+                    <td class="text-left">{{this.description}}</td>
+                    <td class="text-center">Rs. {{this.price}}</td>
+                    <td class="text-center">{{this.category}}</td>
+                    <td class="text-center">
+                        <a href="/admin/products/edit/product/{{this.slug}}" class="text-center"><button
+                                class="btn btn-defaut btn-sm"><i class="fa fa-pencil text-primary"></i></button></a>
+                        <a href="/admin/products/delete/product/{{this.slug}}" class="text-center"
+                            onclick="return confirm('Are you sure you want to delete this cart?');">
+                            <button class="btn btn-default btn-sm"><i class="fa fa-trash text-danger"></i></button>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+    </div>
+    {{>admin_footer}}
+</body>
+
+</html>

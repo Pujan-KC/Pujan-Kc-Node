@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+  {{>header}}
+</head>
+
+<body>
+  {{> navbar }}
+  <div class="container align-items-center">
+    <div class="row mx-auto">
+
+      <div class="col-s-12 col-md-8 col-lg-6 me-auto">
+        <h1 class="text-primary text-start mb-2">{{title}}</h1>
+        <h2 class="text-danger mt-5">{{message}}</h2>
+        <form action="/users/register" method="POST">
+          <div>
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Full Name" name="name" />
+
+          </div>
+          <div>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control" placeholder="Email Address" name="email" />
+          </div>
+          <div>
+            <label for="username" class="form-label">User Name</label>
+            <input type="text" id="username" class="form-control" placeholder="Unique User Name" name="username" />
+          </div>
+          <div>
+            <label for="password" class="form-label">password</label>
+            <input type="password" id="password" class="form-control" placeholder="Password" name="password" />
+          </div>
+          <div>
+            <label for="confirmpassword" class="form-label">Confirm Password</label>
+            <input type="password" id="confirmpassword" class="form-control" placeholder="Re-Enter Your Password"
+              name="confirmpassword" />
+          </div>
+          <button type="submit" class="btn btn-success">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {{>footer}}
+
+</body>
+
+</html>
