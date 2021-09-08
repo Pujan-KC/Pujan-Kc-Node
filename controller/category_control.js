@@ -3,7 +3,6 @@ const CatModel = require("../src/models/catmodel");
 //get category index
 const category = async (req, res) => {
   try {
-    console.log("here");
     const cats = await CatModel.find({});
     res.render("admin/admin_categories", {
       title: "Admin Categories",
